@@ -1,7 +1,7 @@
 ---
 name: Refactor
 about: 'Refactor(페이지 경로 또는 컴포넌트): 코드 리팩토링(똑같은 기능인데 코드만 개선)'
-title: ''
+title: '[REFACTOR]'
 labels: ''
 assignees: ''
 
