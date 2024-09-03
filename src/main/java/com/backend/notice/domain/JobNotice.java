@@ -1,6 +1,6 @@
 package com.backend.notice.domain;
 
-import com.backend.notice.domain.presentation.status.JobType;
+import com.backend.notice.domain.presentation.status.NoticeType;
 import jakarta.persistence.*;
 
 @Table(name = "job_notice")
@@ -11,7 +11,9 @@ public class JobNotice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long num;
-    private String type;
+
+    @Enumerated(EnumType.STRING)
+    private NoticeType type;
     private String title;
     private String date;
 

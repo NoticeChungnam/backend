@@ -11,7 +11,9 @@ public class LocalNotice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long num;
-    private String type;
+
+    @Enumerated(EnumType.STRING)
+    private NoticeType type;
     private String title;
     private String date;
 
