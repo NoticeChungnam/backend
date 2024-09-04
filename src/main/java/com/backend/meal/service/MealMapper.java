@@ -28,7 +28,7 @@ public class MealMapper {
 
     private List<description> parseDescription(String descriptionJson) {
         if (descriptionJson == null || descriptionJson.isEmpty()) {
-            return List.of();
+            return List.of(new description("운영 안함"));
         }
         try {
             List<String> descriptionList = objectMapper.readValue(descriptionJson, new TypeReference<List<String>>() {});
