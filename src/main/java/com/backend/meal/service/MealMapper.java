@@ -3,6 +3,8 @@ package com.backend.meal.service;
 import com.backend.meal.domain.Meal;
 import com.backend.meal.dto.MealResponse;
 import com.backend.meal.dto.MealResponse.*;
+import com.backend.meal.exception.MealException;
+import com.backend.meal.exception.MealExceptionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +38,7 @@ public class MealMapper {
                     .map(description::new)
                     .toList();
         } catch (Exception e) {
-            e.printStackTrace();
-            return List.of();
+            throw new MealException(MealExceptionType.DESCRIPTION_NOT_FOUND);
         }
     }
 
