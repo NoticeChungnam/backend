@@ -23,7 +23,7 @@ public enum MealLocationType {
         return Stream.of(MealLocationType.values())
                 .filter(locationType -> locationType.description.equals(input))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid location: " + input));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid MealLocation: " + input));
     }
 
     @JsonValue
