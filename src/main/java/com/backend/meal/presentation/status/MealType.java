@@ -23,7 +23,7 @@ public enum MealType {
         return Stream.of(MealType.values())
                 .filter(mealType -> mealType.status.equals(input))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid status: " + input));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid MealType: " + input));
     }
 
     @JsonValue

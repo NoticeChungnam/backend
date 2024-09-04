@@ -11,7 +11,9 @@ public enum NoticeType {
     NATIONAL_WORK("국가근로"),
     GOVERNMENT_SUPPORT("정부지원"),
     BAEKMA_INTERNSHIP("백마인턴십"),
-    OVERSEAS_INTERNSHIP("해외인턴십");
+    OVERSEAS_INTERNSHIP("해외인턴십"),
+    PROGRAM("프로그램"),
+    NOTICE("공지사항");
 
     private final String description;
 
