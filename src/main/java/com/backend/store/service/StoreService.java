@@ -15,18 +15,18 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     public List<StoreResponse> getRecommendations(StoreRequest storeRequest) {
-        List<StoreResponse> storeResponses = storeRepository.findRecommendStores(storeRequest.priceRange(), storeRequest.area(), storeRequest.category());
-        if(storeResponses.size() < 2) {
-            throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
-        }
-        return storeResponses;
+        List<StoreResponse> storeResponses = storeRepository.findRecommendStores(storeRequest.priceRange(), storeRequest.area(), storeRequest.category())
+                .filter(storeResponsesList -> storeResponsesList.size() >= 2)
+                .orElseThrow(() -> new StoreException(StoreExceptionType.STORE_NOT_FOUND));
+
+        return StoreResponse.selectRandomStores(storeResponses, 2);
     }
 
     public StoreResponse reloadStore(Long targetStoreId, Long anotherStoreId) {
-        StoreResponse storeResponse = storeRepository.findNewStore(targetStoreId, anotherStoreId);
-        if(storeResponse == null) {
-            throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
-        }
-        return storeResponse;
+        List<StoreResponse> storeResponses = storeRepository.findNewStore(targetStoreId, anotherStoreId)
+                .filter(storeResponsesList -> !storeResponsesList.isEmpty())
+                .orElseThrow(() -> new StoreException(StoreExceptionType.STORE_NOT_FOUND));
+
+        return StoreResponse.selectRandomStores(storeResponses, 1).get(0);
     }
 }

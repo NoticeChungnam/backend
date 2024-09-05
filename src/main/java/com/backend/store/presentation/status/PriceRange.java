@@ -2,10 +2,10 @@ package com.backend.store.presentation.status;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import java.util.stream.Stream;
 
 public enum PriceRange {
-
     FIVE_TO_TEN("5000~10000"),
     TEN_TO_FIFTEEN("10000~15000"),
     FIFTEEN_TO_TWENTY("15000~20000"),
@@ -31,5 +31,4 @@ public enum PriceRange {
     public String getDescription() {
         return description;
     }
-
 }

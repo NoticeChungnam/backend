@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.stream.Stream;
 
 public enum CategoryMajor {
-
     ALL("전체"),
     RESTAURANT("음식점"),
     CAFE("카페"),
