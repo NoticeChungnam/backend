@@ -4,8 +4,10 @@ import com.backend.store.presentation.status.Area;
 import com.backend.store.presentation.status.CategoryMajor;
 import com.backend.store.presentation.status.PriceRange;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
+@Getter
 @Table(name = "store")
 public class Store {
 
