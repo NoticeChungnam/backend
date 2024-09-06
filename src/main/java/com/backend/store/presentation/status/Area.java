@@ -5,24 +5,23 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.stream.Stream;
 
-public enum CategoryMajor {
+public enum Area {
     ALL("전체"),
-    RESTAURANT("음식점"),
-    CAFE("카페"),
-    PUB("술집");
+    GOONG_DONG("궁동"),
+    BONG_MYEONG_DONG("봉명동");
 
     private final String description;
 
-    CategoryMajor(String description) {
+    Area(String description) {
         this.description = description;
     }
 
     @JsonCreator
-    public static CategoryMajor from(String input) {
-        return Stream.of(CategoryMajor.values())
-                .filter(category -> category.description.equals(input))
+    public static Area from(String input) {
+        return Stream.of(Area.values())
+                .filter(area -> area.description.equals(input))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Invalid category: " + input));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid area: " + input));
     }
 
     @JsonValue
