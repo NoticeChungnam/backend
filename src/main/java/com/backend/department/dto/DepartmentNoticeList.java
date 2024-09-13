@@ -21,12 +21,10 @@ public class DepartmentNoticeList {
     }
 
     private DepartmentNoticeResponse toDepartmentNoticeResponse(DepartmentNotice departmentNotice) {
-        List<ArticleDetailsResponse> list = toArticleDetailsResponse(departmentNotice.getArticleDetails());
-        log.info("list: {}", departmentNotice.getArticleDetails());
         return new DepartmentNoticeResponse(
                 departmentNotice.getDepartmentName(),
                 departmentNotice.getBoardNumber(),
-                list
+                toArticleDetailsResponse(departmentNotice.getArticleDetails())
         );
     }
 
