@@ -17,10 +17,9 @@ import lombok.Getter;
 public class DepartmentNotice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long departmentNoticeId;
+    private Long boardNumber;
 
     private String departmentName;
-    private Long boardNumber;
 
     @OneToMany(mappedBy = "departmentNotice", fetch = FetchType.LAZY)
     private List<ArticleDetails> articleDetails = new ArrayList<>();

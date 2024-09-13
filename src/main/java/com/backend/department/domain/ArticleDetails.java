@@ -18,7 +18,6 @@ public class ArticleDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long articleDetailsId;
 
-    private Long boardNumber;
     private String articleTitle;
     private String writerName;
     private String clickCount;
@@ -26,6 +25,6 @@ public class ArticleDetails {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "department_notice_id")
+    @JoinColumn(name = "board_number")
     private DepartmentNotice departmentNotice;
 }
