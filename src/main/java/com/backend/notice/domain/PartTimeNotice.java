@@ -1,19 +1,15 @@
 package com.backend.notice.domain;
 
-import com.backend.notice.presentation.status.NoticeType;
 import jakarta.persistence.*;
 
-@Table(name = "ojt_notice")
+@Table(name = "part_time_notice")
 @Entity
-public class OjtNotice {
+public class PartTimeNotice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long num;
-
-    @Enumerated(EnumType.STRING)
-    private NoticeType type;
+    private String company;
     private String title;
     private String date;
 

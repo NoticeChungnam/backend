@@ -1,6 +1,6 @@
 package com.backend.notice.domain;
 
-import com.backend.notice.domain.presentation.status.NoticeType;
+import com.backend.notice.presentation.status.NoticeType;
 import jakarta.persistence.*;
 
 @Table(name = "local_notice")
