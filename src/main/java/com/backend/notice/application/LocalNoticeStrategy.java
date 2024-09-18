@@ -13,17 +13,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class LocalNoticeStrategy implements NoticeStrategy {
+public class LocalNoticeStrategy extends AbstractNoticeStrategy {
 
     private final LocalNoticeRepository jobNoticeRepository;
 
     @Override
     public List<LocalNoticeResponse> getNotices() {
         List<LocalNotice> localNotices = jobNoticeRepository.findAll();
-        if(localNotices.isEmpty()){
-            throw new NoticeException(NoticeExceptionType.NOTICE_NOT_FOUND);
-        }
-        return NoticeMapper.INSTANCE.toLocalNoticeResponses(localNotices);
+        return validateAndReturn(NoticeMapper.INSTANCE.toLocalNoticeResponses(localNotices));
     }
 
 }

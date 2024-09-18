@@ -13,16 +13,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PartTimeNoticeStrategy implements NoticeStrategy {
+public class PartTimeNoticeStrategy extends AbstractNoticeStrategy {
 
     private final PartTimeNoticeRepository partTimeNoticeRepository;
 
     @Override
     public List<PartTimeNoticeResponse> getNotices() {
         List< PartTimeNotice> partTimeNotices = partTimeNoticeRepository.findAll();
-        if(partTimeNotices.isEmpty()){
-            throw new NoticeException(NoticeExceptionType.NOTICE_NOT_FOUND);
-        }
-        return NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNotices);
+        return validateAndReturn(NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNotices));
     }
 }

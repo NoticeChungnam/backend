@@ -14,17 +14,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OjtNoticeStrategy implements NoticeStrategy{
+public class OjtNoticeStrategy extends AbstractNoticeStrategy{
 
     private final OjtNoticeRepository ojtNoticeRepository;
 
     @Override
     public List<OjtNoticeResponse> getNotices() {
         List<OjtNotice> ojtNotices = ojtNoticeRepository.findAll();
-        if(ojtNotices.isEmpty()){
-            throw new NoticeException(NoticeExceptionType.NOTICE_NOT_FOUND);
-        }
-        return NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNotices);
+        return validateAndReturn(NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNotices));
     }
 
 }
