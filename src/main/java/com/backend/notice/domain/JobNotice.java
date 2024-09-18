@@ -2,9 +2,11 @@ package com.backend.notice.domain;
 
 import com.backend.notice.presentation.status.NoticeType;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Table(name = "job_notice")
 @Entity
+@Getter
 public class JobNotice {
 
     @Id

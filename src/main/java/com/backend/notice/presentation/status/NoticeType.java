@@ -1,4 +1,4 @@
-package com.backend.notice.domain.presentation.status;
+package com.backend.notice.presentation.status;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

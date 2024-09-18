@@ -2,9 +2,11 @@ package com.backend.notice.domain;
 
 import com.backend.notice.presentation.status.NoticeType;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Table(name = "local_notice")
 @Entity
+@Getter
 public class LocalNotice {
 
     @Id
