@@ -13,7 +13,8 @@ public enum NoticeCategory {
     LOCAL("local"),
     OJT("ojt"),
     ACTIVITY("activity"),
-    PARTTIME("part-time"),;
+    PARTTIME("part-time"),
+    ALL("all");
 
     private final String description;
 

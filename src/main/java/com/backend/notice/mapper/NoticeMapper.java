@@ -1,7 +1,6 @@
 package com.backend.notice.mapper;
 
 import com.backend.notice.domain.*;
-import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.dto.NoticeResponse.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

@@ -1,6 +1,8 @@
 package com.backend.notice.application;
 
 import com.backend.notice.dto.NoticeResponse;
+import com.backend.notice.dto.NoticeResponse.*;
+import com.backend.notice.dto.NoticeResponseType;
 import com.backend.notice.presentation.status.NoticeCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +25,12 @@ public class NoticeStrategyFactory {
                         strategy -> strategy));
     }
 
-    public List<? extends NoticeResponse> getNotices(NoticeCategory category) {
+    public List<? extends NoticeResponseType> getNotices(NoticeCategory category) {
         NoticeStrategy strategy = strategyMap.get(category);
         if (strategy == null) {
             throw new IllegalArgumentException("Unknown category: " + category);
         }
-        return (List<? extends NoticeResponse>) strategy.getNotices();
+        return strategy.getNotices();
     }
 
 }

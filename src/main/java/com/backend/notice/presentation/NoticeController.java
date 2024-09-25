@@ -3,6 +3,7 @@ package com.backend.notice.presentation;
 import com.backend.common.response.CommonResponse;
 import com.backend.notice.application.NoticeStrategyFactory;
 import com.backend.notice.dto.NoticeResponse;
+import com.backend.notice.dto.NoticeResponseType;
 import com.backend.notice.presentation.status.NoticeCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class NoticeController {
     private final NoticeStrategyFactory noticeStrategyFactory;
 
     @GetMapping("/{notice-category}")
-    public CommonResponse<List<? extends NoticeResponse>> getCommonNotice(
+    public CommonResponse<List<? extends NoticeResponseType>> getCommonNotice(
             @PathVariable("notice-category") final String noticeCategory) {
         return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from(noticeCategory)), HttpStatus.OK, "공지사항 조회 성공");
     }

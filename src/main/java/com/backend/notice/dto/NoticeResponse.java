@@ -3,7 +3,7 @@ package com.backend.notice.dto;
 import com.backend.notice.presentation.status.NoticeType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class NoticeResponse {
 
     public record JobNoticeResponse(Long id, Long num, NoticeType type, String title, String date) implements NoticeResponseType {
