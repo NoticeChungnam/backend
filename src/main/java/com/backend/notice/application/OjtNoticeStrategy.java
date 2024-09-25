@@ -16,9 +16,8 @@ public class OjtNoticeStrategy extends AbstractNoticeStrategy{
     private final OjtNoticeRepository ojtNoticeRepository;
 
     @Override
-    public List<OjtNoticeResponse> getNotices() {
-        List<OjtNotice> ojtNotices = ojtNoticeRepository.findAll();
-        return validateAndReturn(NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNotices));
+    protected List<OjtNoticeResponse> fetchNotices() {
+        return NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNoticeRepository.findAll());
     }
 
 }

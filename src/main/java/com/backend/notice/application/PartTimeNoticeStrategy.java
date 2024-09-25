@@ -16,9 +16,8 @@ public class PartTimeNoticeStrategy extends AbstractNoticeStrategy {
     private final PartTimeNoticeRepository partTimeNoticeRepository;
 
     @Override
-    public List<PartTimeNoticeResponse> getNotices() {
-        List< PartTimeNotice> partTimeNotices = partTimeNoticeRepository.findAll();
-        return validateAndReturn(NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNotices));
+    protected List<PartTimeNoticeResponse> fetchNotices() {
+        return NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNoticeRepository.findAll());
     }
 
 }

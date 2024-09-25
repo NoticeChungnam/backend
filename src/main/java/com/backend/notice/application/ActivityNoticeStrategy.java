@@ -15,9 +15,8 @@ public class ActivityNoticeStrategy extends AbstractNoticeStrategy {
     private final ActivityNoticeRepository activityNoticeRepository;
 
     @Override
-    public List<ActivityNoticeResponse> getNotices() {
-        List<ActivityNotice> activityNotices = activityNoticeRepository.findAll();
-        return validateAndReturn(NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNotices));
+    protected List<ActivityNoticeResponse> fetchNotices() {
+        return NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAll());
     }
 
 }

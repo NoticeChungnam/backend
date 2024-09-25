@@ -16,9 +16,8 @@ public class LocalNoticeStrategy extends AbstractNoticeStrategy {
     private final LocalNoticeRepository jobNoticeRepository;
 
     @Override
-    public List<LocalNoticeResponse> getNotices() {
-        List<LocalNotice> localNotices = jobNoticeRepository.findAll();
-        return validateAndReturn(NoticeMapper.INSTANCE.toLocalNoticeResponses(localNotices));
+    protected List<LocalNoticeResponse> fetchNotices() {
+        return NoticeMapper.INSTANCE.toLocalNoticeResponses(jobNoticeRepository.findAll());
     }
 
 }

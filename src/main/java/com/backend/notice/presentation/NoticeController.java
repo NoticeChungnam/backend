@@ -2,7 +2,6 @@ package com.backend.notice.presentation;
 
 import com.backend.common.response.CommonResponse;
 import com.backend.notice.application.NoticeStrategyFactory;
-import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.dto.NoticeResponseType;
 import com.backend.notice.presentation.status.NoticeCategory;
 import lombok.RequiredArgsConstructor;

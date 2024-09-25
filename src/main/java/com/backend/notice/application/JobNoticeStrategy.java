@@ -16,9 +16,8 @@ public class JobNoticeStrategy extends AbstractNoticeStrategy {
     private final JobNoticeRepository jobNoticeRepository;
 
     @Override
-    public List<JobNoticeResponse> getNotices() {
-        List<JobNotice> jobNotices = jobNoticeRepository.findAll();
-        return validateAndReturn(NoticeMapper.INSTANCE.toJobNoticeResponses(jobNotices));
+    public List<JobNoticeResponse> fetchNotices() {
+        return NoticeMapper.INSTANCE.toJobNoticeResponses(jobNoticeRepository.findAll());
     }
 
 }
