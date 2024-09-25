@@ -15,10 +15,8 @@ public class CrowdingLevelService {
     private final CrowdingLevelRepository crowdingLevelRepository;
 
     public List<ConfusionResponse> getConfusion() {
-        List<ConfusionResponse> confusions = crowdingLevelRepository.findAllConfusions();
-        if (confusions.isEmpty()) {
-            throw new CrowdingException(CROWDING_NOT_FOUND);
-        }
-        return crowdingLevelRepository.findAllConfusions();
+        return crowdingLevelRepository.findAllConfusions()
+                .filter(list -> !list.isEmpty())
+                .orElseThrow(() -> new CrowdingException(CROWDING_NOT_FOUND));
     }
 }
