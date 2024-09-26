@@ -1,7 +1,6 @@
 package com.backend.notice.application;
 
-import com.backend.notice.dto.NoticeResponse;
-import com.backend.notice.dto.NoticeResponse.*;
+import com.backend.notice.domain.strategy.NoticeStrategy;
 import com.backend.notice.dto.NoticeResponseType;
 import com.backend.notice.presentation.status.NoticeCategory;
 import org.springframework.beans.factory.annotation.Autowired;

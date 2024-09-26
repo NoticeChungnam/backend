@@ -1,6 +1,5 @@
-package com.backend.notice.application;
+package com.backend.notice.domain.strategy;
 
-import com.backend.notice.domain.JobNotice;
 import com.backend.notice.domain.repository.JobNoticeRepository;
 import com.backend.notice.dto.NoticeResponse.*;
 import com.backend.notice.mapper.NoticeMapper;

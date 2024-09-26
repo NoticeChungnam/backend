@@ -1,4 +1,4 @@
-package com.backend.notice.application;
+package com.backend.notice.domain.strategy;
 
 import com.backend.notice.dto.NoticeResponseType;
 import com.backend.notice.exception.NoticeException;

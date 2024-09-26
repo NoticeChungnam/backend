@@ -1,6 +1,5 @@
-package com.backend.notice.application;
+package com.backend.notice.domain.strategy;
 
-import com.backend.notice.domain.OjtNotice;
 import com.backend.notice.domain.repository.OjtNoticeRepository;
 import com.backend.notice.dto.NoticeResponse.*;
 import com.backend.notice.mapper.NoticeMapper;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OjtNoticeStrategy extends AbstractNoticeStrategy{
+public class OjtNoticeStrategy extends AbstractNoticeStrategy {
 
     private final OjtNoticeRepository ojtNoticeRepository;
 
