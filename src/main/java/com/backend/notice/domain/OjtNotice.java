@@ -4,6 +4,8 @@ import com.backend.notice.presentation.status.NoticeType;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Table(name = "ojt_notice")
 @Entity
 @Getter
@@ -17,6 +19,6 @@ public class OjtNotice {
     @Enumerated(EnumType.STRING)
     private NoticeType type;
     private String title;
-    private String date;
+    private LocalDate date;
 
 }

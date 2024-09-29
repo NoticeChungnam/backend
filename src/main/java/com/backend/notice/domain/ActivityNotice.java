@@ -3,6 +3,8 @@ package com.backend.notice.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Table(name = "activity_notice")
 @Entity
 @Getter
@@ -13,6 +15,6 @@ public class ActivityNotice {
     private Long id;
     private Long num;
     private String title;
-    private String date;
+    private LocalDate date;
 
 }

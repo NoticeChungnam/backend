@@ -1,6 +1,7 @@
 package com.backend.notice.domain.strategy;
 
 import com.backend.notice.domain.repository.OjtNoticeRepository;
+import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.dto.NoticeResponse.*;
 import com.backend.notice.mapper.NoticeMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class OjtNoticeStrategy extends AbstractNoticeStrategy {
     private final OjtNoticeRepository ojtNoticeRepository;
 
     @Override
-    protected List<OjtNoticeResponse> fetchNotices() {
+    protected List<NoticeResponse> fetchNotices() {
         return NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNoticeRepository.findAll());
     }
 

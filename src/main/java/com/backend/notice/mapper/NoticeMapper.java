@@ -1,6 +1,7 @@
 package com.backend.notice.mapper;
 
 import com.backend.notice.domain.*;
+import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.dto.NoticeResponse.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -13,18 +14,18 @@ public interface NoticeMapper {
 
     NoticeMapper INSTANCE = Mappers.getMapper(NoticeMapper.class);
 
-    List<ActivityNoticeResponse> toActivityNoticeResponses(List<ActivityNotice> notices);
-    List<JobNoticeResponse> toJobNoticeResponses(List<JobNotice> jobNotices);
-    List<LocalNoticeResponse> toLocalNoticeResponses(List<LocalNotice> localNotices);
-    List<OjtNoticeResponse> toOjtNoticeResponses(List<OjtNotice> ojtNotices);
-    List<PartTimeNoticeResponse> toPartTimeNoticeResponses(List<PartTimeNotice> partTimeNotices);
+    List<NoticeResponse> toActivityNoticeResponses(List<ActivityNotice> notices);
+    List<NoticeResponse> toJobNoticeResponses(List<JobNotice> jobNotices);
+    List<NoticeResponse> toLocalNoticeResponses(List<LocalNotice> localNotices);
+    List<NoticeResponse> toOjtNoticeResponses(List<OjtNotice> ojtNotices);
+    List<NoticeResponse> toPartTimeNoticeResponses(List<PartTimeNotice> partTimeNotices);
 
 
-    ActivityNoticeResponse toActivityNoticeResponse(ActivityNotice notice);
-    JobNoticeResponse toJobNoticeResponse(JobNotice jobNotice);
-    LocalNoticeResponse toLocalNoticeResponse(LocalNotice localNotice);
-    OjtNoticeResponse toOjtNoticeResponse(OjtNotice ojtNotice);
-    PartTimeNoticeResponse toPartTimeNoticeResponse(PartTimeNotice partTimeNotice);
+    NoticeResponse toActivityNoticeResponse(ActivityNotice notice);
+    NoticeResponse toJobNoticeResponse(JobNotice jobNotice);
+    NoticeResponse toLocalNoticeResponse(LocalNotice localNotice);
+    NoticeResponse toOjtNoticeResponse(OjtNotice ojtNotice);
+    NoticeResponse toPartTimeNoticeResponse(PartTimeNotice partTimeNotice);
 
 
 
