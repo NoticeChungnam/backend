@@ -4,6 +4,7 @@ import com.backend.notice.domain.repository.OjtNoticeRepository;
 import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.dto.NoticeResponse.*;
 import com.backend.notice.mapper.NoticeMapper;
+import com.backend.notice.presentation.status.NoticeType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,12 @@ public class OjtNoticeStrategy extends AbstractNoticeStrategy {
     private final OjtNoticeRepository ojtNoticeRepository;
 
     @Override
-    protected List<NoticeResponse> fetchNotices() {
+    protected List<NoticeResponse> fetchNotices(NoticeType noticeType) {
+        return NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNoticeRepository.findAllByNoticeType(noticeType));
+    }
+
+    @Override
+    protected List<NoticeResponse> fetchAllNotices() {
         return NoticeMapper.INSTANCE.toOjtNoticeResponses(ojtNoticeRepository.findAll());
     }
 

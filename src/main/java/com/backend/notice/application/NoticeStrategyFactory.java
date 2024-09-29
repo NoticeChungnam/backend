@@ -3,6 +3,7 @@ package com.backend.notice.application;
 import com.backend.notice.domain.strategy.NoticeStrategy;
 import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.presentation.status.NoticeCategory;
+import com.backend.notice.presentation.status.NoticeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,20 @@ public class NoticeStrategyFactory {
                         strategy -> strategy));
     }
 
-    public List<NoticeResponse> getNotices(NoticeCategory category) {
+    public List<NoticeResponse> getNotices(NoticeCategory category, NoticeType noticeType) {
         NoticeStrategy strategy = strategyMap.get(category);
         if (strategy == null) {
             throw new IllegalArgumentException("Unknown category: " + category);
         }
-        return strategy.getNotices();
+        return strategy.getNotices(noticeType);
+    }
+
+    public List<NoticeResponse> getAllNotices(NoticeCategory category) {
+        NoticeStrategy strategy = strategyMap.get(category);
+        if (strategy == null) {
+            throw new IllegalArgumentException("Unknown category: " + category);
+        }
+        return strategy.getAllNotices();
     }
 
 }

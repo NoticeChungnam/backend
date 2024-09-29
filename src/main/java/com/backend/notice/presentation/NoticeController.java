@@ -20,25 +20,25 @@ public class NoticeController {
 
     private final NoticeStrategyFactory noticeStrategyFactory;
 
-    @GetMapping("/{notice-category}")
-    public CommonResponse<List<NoticeResponse>> getCommonNotice(
-            @PathVariable("notice-category") final String noticeCategory) {
-        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from(noticeCategory)), HttpStatus.OK, "공지사항 조회 성공");
-    }
+//    @GetMapping("/{notice-category}")
+//    public CommonResponse<List<NoticeResponse>> getCommonNotice(
+//            @PathVariable("notice-category") final String noticeCategory) {
+//        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from(noticeCategory)), HttpStatus.OK, "공지사항 조회 성공");
+//    }
 
     @GetMapping("/job")
     public CommonResponse<List<NoticeResponse>> getJobNotice() {
-        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from("job")), HttpStatus.OK, "진로/취업/지역청년 공고 조회 성공");
+        return CommonResponse.success(noticeStrategyFactory.getAllNotices(NoticeCategory.from("job")), HttpStatus.OK, "진로/취업/지역청년 공고 조회 성공");
     }
 
     @GetMapping("/activity")
     public CommonResponse<List<NoticeResponse>> getActivityNotice() {
-        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from("activity")), HttpStatus.OK, "대외활동/아르바이트 공고 조회 성공");
+        return CommonResponse.success(noticeStrategyFactory.getAllNotices(NoticeCategory.from("activity")), HttpStatus.OK, "대외활동/아르바이트 공고 조회 성공");
     }
 
     @GetMapping("/ojt")
     public CommonResponse<List<NoticeResponse>> getOjtNotice() {
-        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from("ojt")), HttpStatus.OK, "현장실습 공고 조회 성공");
+        return CommonResponse.success(noticeStrategyFactory.getAllNotices(NoticeCategory.from("ojt")), HttpStatus.OK, "현장실습 공고 조회 성공");
     }
 
 }
