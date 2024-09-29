@@ -19,11 +19,10 @@ public class ActivityNoticeStrategy extends AbstractNoticeStrategy {
 
     @Override
     protected List<NoticeResponse> fetchNotices(NoticeType noticeType) {
-        List<NoticeResponse> activityNotices = NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAllByNoticeType(noticeType));
-        List<NoticeResponse> partTimeNotices = NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNoticeRepository.findAllByNoticeType(noticeType));
-
-        activityNotices.addAll(partTimeNotices);
-        return activityNotices;
+        if (noticeType.equals(NoticeType.ACTIVITY)) {
+            return NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAll());
+        }
+            return NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNoticeRepository.findAll());
     }
 
     @Override
