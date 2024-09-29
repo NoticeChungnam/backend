@@ -15,7 +15,7 @@ public enum NoticeType {
     PROGRAM("프로그램"),
     NOTICE("공지사항"),
     ACTIVITY("대외활동"),
-    PART_TIME("아르바이트");
+    PART_TIME("아르바이트"),;
 
     private final String description;
 

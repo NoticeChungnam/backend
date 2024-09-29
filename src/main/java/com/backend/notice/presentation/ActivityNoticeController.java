@@ -4,6 +4,8 @@ import com.backend.common.response.CommonResponse;
 import com.backend.notice.application.NoticeStrategyFactory;
 import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.presentation.status.NoticeCategory;
+import com.backend.notice.presentation.status.NoticeType;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,17 @@ public class ActivityNoticeController {
 
     @GetMapping("/all")
     public CommonResponse<List<NoticeResponse>> getActivityNotice() {
-        return CommonResponse.success(noticeStrategyFactory.getAllNotices(NoticeCategory.from("activity")), HttpStatus.OK, "대외활동/아르바이트 공고 조회 성공");
+        return CommonResponse.success(noticeStrategyFactory.getAllNotices(NoticeCategory.from("activity")), HttpStatus.OK, "대외활동/아르바이트 전체 조회 성공");
+    }
+
+    @GetMapping("/activity")
+    public CommonResponse<List<NoticeResponse>> getActivity() {
+        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from("activity"), NoticeType.ACTIVITY), HttpStatus.OK, "대외활동 조회 성공");
+    }
+
+    @GetMapping("/part-time")
+    public CommonResponse<List<NoticeResponse>> getPartTime() {
+        return CommonResponse.success(noticeStrategyFactory.getNotices(NoticeCategory.from("activity"), NoticeType.PART_TIME), HttpStatus.OK, "아르바이트 조회 성공");
     }
 
 }
