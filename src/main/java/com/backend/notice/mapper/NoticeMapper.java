@@ -20,14 +20,11 @@ public interface NoticeMapper {
     List<NoticeResponse> toOjtNoticeResponses(List<OjtNotice> ojtNotices);
     List<NoticeResponse> toPartTimeNoticeResponses(List<PartTimeNotice> partTimeNotices);
 
-
     NoticeResponse toActivityNoticeResponse(ActivityNotice notice);
     NoticeResponse toJobNoticeResponse(JobNotice jobNotice);
     NoticeResponse toLocalNoticeResponse(LocalNotice localNotice);
     NoticeResponse toOjtNoticeResponse(OjtNotice ojtNotice);
     NoticeResponse toPartTimeNoticeResponse(PartTimeNotice partTimeNotice);
-
-
 
 }
 

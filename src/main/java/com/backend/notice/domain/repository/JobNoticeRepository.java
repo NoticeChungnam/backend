@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface JobNoticeRepository extends JpaRepository<JobNotice, Long>{
 
-    List<JobNotice> findAllByNoticeType(NoticeType noticeType);
+    List<JobNotice> findAllByOrderByDateDesc();
+    List<JobNotice> findAllByTypeOrderByDateDesc(NoticeType noticeType);
+
 }

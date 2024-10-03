@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OjtNoticeController {
 
-    NoticeStrategyFactory noticeStrategyFactory;
+    private final NoticeStrategyFactory noticeStrategyFactory;
 
     @GetMapping("/all")
     public CommonResponse<List<NoticeResponse>> getOjtNotice() {

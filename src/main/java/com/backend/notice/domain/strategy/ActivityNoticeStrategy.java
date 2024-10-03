@@ -5,6 +5,7 @@ import com.backend.notice.domain.repository.PartTimeNoticeRepository;
 import com.backend.notice.dto.NoticeResponse;
 import com.backend.notice.dto.NoticeResponse.*;
 import com.backend.notice.mapper.NoticeMapper;
+import com.backend.notice.presentation.status.NoticeCategory;
 import com.backend.notice.presentation.status.NoticeType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,16 +19,21 @@ public class ActivityNoticeStrategy extends AbstractNoticeStrategy {
     private final PartTimeNoticeRepository partTimeNoticeRepository;
 
     @Override
-    protected List<NoticeResponse> fetchNotices(NoticeType noticeType) {
+    public NoticeCategory getSupportedCategory() {
+        return NoticeCategory.ACTIVITY;
+    }
+
+    @Override
+    public List<NoticeResponse> fetchNotices(NoticeType noticeType) {
         if (noticeType.equals(NoticeType.ACTIVITY)) {
-            return NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAll());
+            return NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAllByOrderByDateDesc());
         }
             return NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNoticeRepository.findAll());
     }
 
     @Override
     protected List<NoticeResponse> fetchAllNotices() {
-        List<NoticeResponse> activityNotices = NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAll());
+        List<NoticeResponse> activityNotices = NoticeMapper.INSTANCE.toActivityNoticeResponses(activityNoticeRepository.findAllByOrderByDateDesc());
         List<NoticeResponse> partTimeNotices = NoticeMapper.INSTANCE.toPartTimeNoticeResponses(partTimeNoticeRepository.findAll());
 
         activityNotices.addAll(partTimeNotices);
