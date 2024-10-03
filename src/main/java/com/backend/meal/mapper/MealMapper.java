@@ -1,4 +1,4 @@
-package com.backend.meal.service;
+package com.backend.meal.mapper;
 
 import com.backend.meal.domain.Meal;
 import com.backend.meal.dto.MealResponse;
