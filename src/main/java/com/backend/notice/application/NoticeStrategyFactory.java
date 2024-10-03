@@ -19,10 +19,7 @@ public class NoticeStrategyFactory {
     @Autowired
     public NoticeStrategyFactory(List<NoticeStrategy> strategies) {
         strategyMap = strategies.stream()
-                .collect(Collectors.toMap(
-                        strategy -> NoticeCategory.valueOf(
-                                strategy.getClass().getSimpleName().replace("NoticeStrategy", "").toUpperCase()),
-                        strategy -> strategy));
+                .collect(Collectors.toMap(NoticeStrategy::getSupportedCategory, strategy -> strategy));
     }
 
     public List<NoticeResponse> getNotices(NoticeCategory category, NoticeType noticeType) {
