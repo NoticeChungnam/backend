@@ -34,7 +34,7 @@ public class StoreList {
         return new StoreList(createFilteredStores(filteredRestaurantStores, filteredCafeStores)).getOneRandomRestaurantAndOneRandomCafe();
     }
 
-    private static List<Store> getFilteredStores(PriceRange priceRange, Area area, List<Store> allStores, CategoryMajor categoryMajor) {
+    private List<Store> getFilteredStores(PriceRange priceRange, Area area, List<Store> allStores, CategoryMajor categoryMajor) {
         return allStores.stream()
                 .filter(store -> store.getPriceRange().equals(priceRange))
                 .filter(store -> store.getArea().equals(area) || area == Area.ALL)
@@ -42,13 +42,13 @@ public class StoreList {
                 .collect(Collectors.toList());
     }
 
-    private static List<Store> createFilteredStores(List<Store> filteredRestaurantStores, List<Store> filteredCafeStores) {
+    private List<Store> createFilteredStores(List<Store> filteredRestaurantStores, List<Store> filteredCafeStores) {
         List<Store> filteredStores = new ArrayList<>(filteredRestaurantStores);
         filteredStores.addAll(filteredCafeStores);
         return filteredStores;
     }
 
-    private static void validateMinTwoStores(List<Store> restaurant, List<Store> cafe) {
+    private void validateMinTwoStores(List<Store> restaurant, List<Store> cafe) {
         if (restaurant.isEmpty() || cafe.isEmpty()) {
             throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
         }
@@ -75,7 +75,7 @@ public class StoreList {
         return new StoreList(filteredStores).getOneRandomStore();
     }
 
-    private static void validateMinOneStore(List<Store> stores) {
+    private void validateMinOneStore(List<Store> stores) {
         if (stores.isEmpty()) {
             throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
         }
@@ -103,7 +103,7 @@ public class StoreList {
         Collections.shuffle(stores);
     }
 
-    private static StoreResponse toStoreResponse(Store store) {
+    private StoreResponse toStoreResponse(Store store) {
         return new StoreResponse(
                 store.getStoreId(),
                 store.getStoreName(),
