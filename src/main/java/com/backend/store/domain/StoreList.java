@@ -22,12 +22,16 @@ public class StoreList {
         this.stores = new ArrayList<>(stores);
     }
 
-    public static StoreList createTwoRecommendationStoreList(PriceRange priceRange, Area area, List<Store> allStores) {
+    public static StoreList of(List<Store> allStores) {
+        return new StoreList(allStores);
+    }
+
+    public List<StoreResponse> getTwoRecommendationStoreList(PriceRange priceRange, Area area, List<Store> allStores) {
         List<Store> filteredRestaurantStores = getFilteredStores(priceRange, area, allStores, RESTAURANT);
         List<Store> filteredCafeStores = getFilteredStores(priceRange, area, allStores, CAFE);
 
         validateMinTwoStores(filteredRestaurantStores, filteredCafeStores);
-        return new StoreList(createFilteredStores(filteredRestaurantStores, filteredCafeStores));
+        return new StoreList(createFilteredStores(filteredRestaurantStores, filteredCafeStores)).getOneRandomRestaurantAndOneRandomCafe();
     }
 
     private static List<Store> getFilteredStores(PriceRange priceRange, Area area, List<Store> allStores, CategoryMajor categoryMajor) {
@@ -50,17 +54,17 @@ public class StoreList {
         }
     }
 
-    public static StoreList createOneRecommendationStoreList(PriceRange priceRange, Area area, CategoryMajor category, List<Store> allStores) {
+    public StoreResponse getOneRecommendationStoreList(PriceRange priceRange, Area area, CategoryMajor category, List<Store> allStores) {
         List<Store> filteredStores = allStores.stream()
                 .filter(store -> store.getPriceRange().equals(priceRange))
                 .filter(store -> store.getArea().equals(area) || area == Area.ALL)
                 .filter(store -> store.getCategoryMajor().equals(category))
                 .collect(Collectors.toList());
         validateMinOneStore(filteredStores);
-        return new StoreList(filteredStores);
+        return new StoreList(filteredStores).getOneRandomStore();
     }
 
-    public static StoreList createOneReloadStoreList(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor, List<Store> allStores) {
+    public StoreResponse getOneReloadStoreList(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor, List<Store> allStores) {
         List<Store> filteredStores = allStores.stream()
                 .filter(store -> !store.getStoreId().equals(targetStoreId) && !store.getStoreId().equals(anotherStoreId))
                 .filter(store -> store.getPriceRange().equals(priceRange))
@@ -68,7 +72,7 @@ public class StoreList {
                 .filter(store -> store.getCategoryMajor().equals(categoryMajor))
                 .collect(Collectors.toList());
         validateMinOneStore(filteredStores);
-        return new StoreList(filteredStores);
+        return new StoreList(filteredStores).getOneRandomStore();
     }
 
     private static void validateMinOneStore(List<Store> stores) {
@@ -77,7 +81,7 @@ public class StoreList {
         }
     }
 
-    public List<StoreResponse> getOneRandomRestaurantAndOneRandomCafe() {
+    private List<StoreResponse> getOneRandomRestaurantAndOneRandomCafe() {
         shuffleStores();
         List<Store> restaurants = stores.stream()
                 .filter(store -> store.getCategoryMajor().equals(RESTAURANT))
@@ -90,7 +94,7 @@ public class StoreList {
         return new ArrayList<>(List.of(toStoreResponse(restaurants.get(0)), toStoreResponse(cafes.get(0))));
     }
 
-    public StoreResponse getOneRandomStore() {
+    private StoreResponse getOneRandomStore() {
         shuffleStores();
         return toStoreResponse(stores.get(0));
     }
@@ -99,7 +103,7 @@ public class StoreList {
         Collections.shuffle(stores);
     }
 
-    private StoreResponse toStoreResponse(Store store) {
+    private static StoreResponse toStoreResponse(Store store) {
         return new StoreResponse(
                 store.getStoreId(),
                 store.getStoreName(),

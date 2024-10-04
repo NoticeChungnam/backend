@@ -18,19 +18,19 @@ public class StoreService {
 
     public List<StoreResponse> getRecommendations(PriceRange priceRange, Area area) {
         List<Store> stores = storeRepository.findAll();
-        StoreList storeList = StoreList.createTwoRecommendationStoreList(priceRange, area, stores);
-        return storeList.getOneRandomRestaurantAndOneRandomCafe();
+        StoreList storeList = StoreList.of(stores);
+        return storeList.getTwoRecommendationStoreList(priceRange, area, stores);
     }
 
     public StoreResponse getRecommendation(PriceRange priceRange, Area area, CategoryMajor category) {
         List<Store> stores = storeRepository.findAll();
-        StoreList storeList = StoreList.createOneRecommendationStoreList(priceRange, area, category, stores);
-        return storeList.getOneRandomStore();
+        StoreList storeList = StoreList.of(stores);
+        return storeList.getOneRecommendationStoreList(priceRange, area, category, stores);
     }
 
     public StoreResponse reloadStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor category) {
         List<Store> stores = storeRepository.findAll();
-        StoreList storeList = StoreList.createOneReloadStoreList(targetStoreId, anotherStoreId, priceRange, area, category, stores);
-        return storeList.getOneRandomStore();
+        StoreList storeList = StoreList.of(stores);
+        return storeList.getOneReloadStoreList(targetStoreId, anotherStoreId, priceRange, area, category, stores);
     }
 }
