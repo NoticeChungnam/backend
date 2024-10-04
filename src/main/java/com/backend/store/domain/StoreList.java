@@ -1,10 +1,15 @@
 package com.backend.store.domain;
 
 
-import com.backend.store.domain.request.StoreRequest;
-import com.backend.store.domain.response.StoreResponse;
+import static com.backend.store.presentation.status.CategoryMajor.CAFE;
+import static com.backend.store.presentation.status.CategoryMajor.RESTAURANT;
+
+import com.backend.store.dto.response.StoreResponse;
 import com.backend.store.exception.StoreException;
 import com.backend.store.exception.StoreExceptionType;
+import com.backend.store.presentation.status.Area;
+import com.backend.store.presentation.status.CategoryMajor;
+import com.backend.store.presentation.status.PriceRange;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,42 +22,72 @@ public class StoreList {
         this.stores = new ArrayList<>(stores);
     }
 
-    public static StoreList createTwoStoreList(StoreRequest storeRequest, List<Store> allStores) {
-        List<Store> filteredStores = allStores.stream()
-                .filter(store -> store.getPriceRange().equals(storeRequest.priceRange()))
-                .filter(store -> store.getArea().equals(storeRequest.area()))
-                .filter(store -> store.getCategoryMajor().equals(storeRequest.category()))
-                .collect(Collectors.toList());
-        validateMinTwoStores(filteredStores);
-        return new StoreList(filteredStores);
+    public static StoreList createTwoRecommendationStoreList(PriceRange priceRange, Area area, List<Store> allStores) {
+        List<Store> filteredRestaurantStores = getFilteredStores(priceRange, area, allStores, RESTAURANT);
+        List<Store> filteredCafeStores = getFilteredStores(priceRange, area, allStores, CAFE);
+
+        validateMinTwoStores(filteredRestaurantStores, filteredCafeStores);
+        return new StoreList(createFilteredStores(filteredRestaurantStores, filteredCafeStores));
     }
 
-    public static void validateMinTwoStores(List<Store> stores) {
-        if (stores.size() < 2) {
+    private static List<Store> getFilteredStores(PriceRange priceRange, Area area, List<Store> allStores, CategoryMajor categoryMajor) {
+        return allStores.stream()
+                .filter(store -> store.getPriceRange().equals(priceRange))
+                .filter(store -> store.getArea().equals(area) || area == Area.ALL)
+                .filter(store -> store.getCategoryMajor().equals(categoryMajor))
+                .collect(Collectors.toList());
+    }
+
+    private static List<Store> createFilteredStores(List<Store> filteredRestaurantStores, List<Store> filteredCafeStores) {
+        List<Store> filteredStores = new ArrayList<>(filteredRestaurantStores);
+        filteredStores.addAll(filteredCafeStores);
+        return filteredStores;
+    }
+
+    private static void validateMinTwoStores(List<Store> restaurant, List<Store> cafe) {
+        if (restaurant.isEmpty() || cafe.isEmpty()) {
             throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
         }
     }
 
-    public static StoreList createOneStoreList(Long firstStoreId, Long secondStoreId, List<Store> allStores) {
+    public static StoreList createOneRecommendationStoreList(PriceRange priceRange, Area area, CategoryMajor category, List<Store> allStores) {
         List<Store> filteredStores = allStores.stream()
-                .filter(store -> !store.getStoreId().equals(firstStoreId) && !store.getStoreId().equals(secondStoreId))
+                .filter(store -> store.getPriceRange().equals(priceRange))
+                .filter(store -> store.getArea().equals(area) || area == Area.ALL)
+                .filter(store -> store.getCategoryMajor().equals(category))
                 .collect(Collectors.toList());
         validateMinOneStore(filteredStores);
         return new StoreList(filteredStores);
     }
 
-    public static void validateMinOneStore(List<Store> stores) {
+    public static StoreList createOneReloadStoreList(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor, List<Store> allStores) {
+        List<Store> filteredStores = allStores.stream()
+                .filter(store -> !store.getStoreId().equals(targetStoreId) && !store.getStoreId().equals(anotherStoreId))
+                .filter(store -> store.getPriceRange().equals(priceRange))
+                .filter(store -> store.getArea().equals(area) || area == Area.ALL)
+                .filter(store -> store.getCategoryMajor().equals(categoryMajor))
+                .collect(Collectors.toList());
+        validateMinOneStore(filteredStores);
+        return new StoreList(filteredStores);
+    }
+
+    private static void validateMinOneStore(List<Store> stores) {
         if (stores.isEmpty()) {
             throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
         }
     }
 
-    public List<StoreResponse> getTwoRandomStores() {
+    public List<StoreResponse> getOneRandomRestaurantAndOneRandomCafe() {
         shuffleStores();
-        return stores.stream()
-                .limit(2)
-                .map(this::toStoreResponse)
+        List<Store> restaurants = stores.stream()
+                .filter(store -> store.getCategoryMajor().equals(RESTAURANT))
                 .toList();
+
+        List<Store> cafes = stores.stream()
+                .filter(store -> store.getCategoryMajor().equals(CAFE))
+                .toList();
+
+        return new ArrayList<>(List.of(toStoreResponse(restaurants.get(0)), toStoreResponse(cafes.get(0))));
     }
 
     public StoreResponse getOneRandomStore() {
@@ -71,7 +106,9 @@ public class StoreList {
                 store.getLatitude(),
                 store.getLongitude(),
                 store.getPriceRange(),
-                store.getStoreUrl()
+                store.getStoreUrl(),
+                store.getCategoryMajor().getDescription(),
+                store.getArea().getDescription()
         );
     }
 }

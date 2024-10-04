@@ -1,4 +1,4 @@
-package com.backend.store.domain.request;
+package com.backend.store.dto.request;
 
 import com.backend.store.presentation.status.Area;
 import com.backend.store.presentation.status.CategoryMajor;
