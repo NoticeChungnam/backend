@@ -1,6 +1,7 @@
 package com.backend.academic_schedule.presentation;
 
 import com.backend.academic_schedule.dto.response.AcademicScheduleResponse;
+import com.backend.academic_schedule.presentation.status.Month;
 import com.backend.academic_schedule.service.AcademicScheduleService;
 import com.backend.common.response.CommonResponse;
 import java.util.List;
@@ -19,7 +20,7 @@ public class AcademicScheduleController {
 
     @GetMapping
     public CommonResponse<List<AcademicScheduleResponse>> getAcademicSchedule(
-            @RequestParam("month") int month
+            @RequestParam("month") Month month
     ) {
         List<AcademicScheduleResponse> academicScheduleResponseList = academicScheduleService.getAcademicSchedule(month);
         return CommonResponse.success(academicScheduleResponseList, HttpStatus.OK, "학사 일정 정보를 불러오는데 성공하였습니다.");

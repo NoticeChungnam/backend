@@ -15,9 +15,8 @@ public class AcademicScheduleService {
     private final AcademicScheduleRepository academicScheduleRepository;
 
     @Transactional(readOnly = true)
-    public List<AcademicScheduleResponse> getAcademicSchedule(int month) {
-        Month monthEnum = Month.fromInt(month);
-        return academicScheduleRepository.findAllByMonth(monthEnum).stream()
+    public List<AcademicScheduleResponse> getAcademicSchedule(Month month) {
+        return academicScheduleRepository.findAllByMonth(month).stream()
                 .map(AcademicScheduleMapper::toAcademicScheduleResponse)
                 .toList();
     }
