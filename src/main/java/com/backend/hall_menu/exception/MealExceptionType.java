@@ -1,7 +1,6 @@
-package com.backend.meal.exception;
+package com.backend.hall_menu.exception;
 
 import com.backend.common.exception.BaseExceptionType;
-import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.backend.meal.exception;
+package com.backend.hall_menu.exception;
 
 import com.backend.common.exception.BaseException;
 import com.backend.common.exception.BaseExceptionType;

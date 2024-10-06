@@ -1,6 +1,5 @@
-package com.backend.meal.presentation.status;
+package com.backend.hall_menu.presentation.status;
 
-import com.backend.meal.domain.Meal;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 

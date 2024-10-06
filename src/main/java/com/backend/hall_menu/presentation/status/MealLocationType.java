@@ -1,4 +1,4 @@
-package com.backend.meal.presentation.status;
+package com.backend.hall_menu.presentation.status;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
