@@ -1,6 +1,6 @@
-package com.backend.hall_menu.dto;
+package com.backend.Meal.dto;
 
-import com.backend.hall_menu.presentation.status.MealType;
+import com.backend.Meal.presentation.status.MealType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

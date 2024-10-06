@@ -1,8 +1,8 @@
-package com.backend.hall_menu.presentation;
+package com.backend.Meal.presentation;
 
 import com.backend.common.response.CommonResponse;
-import com.backend.hall_menu.dto.MealResponse;
-import com.backend.hall_menu.service.MealService;
+import com.backend.Meal.dto.MealResponse;
+import com.backend.Meal.service.MealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

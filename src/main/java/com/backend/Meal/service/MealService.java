@@ -1,9 +1,9 @@
-package com.backend.hall_menu.service;
+package com.backend.Meal.service;
 
-import com.backend.hall_menu.domain.Meal;
-import com.backend.hall_menu.domain.repository.MealRepository;
-import com.backend.hall_menu.dto.MealResponse;
-import com.backend.hall_menu.mapper.MealMapper;
+import com.backend.Meal.domain.Meal;
+import com.backend.Meal.domain.repository.MealRepository;
+import com.backend.Meal.dto.MealResponse;
+import com.backend.Meal.mapper.MealMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

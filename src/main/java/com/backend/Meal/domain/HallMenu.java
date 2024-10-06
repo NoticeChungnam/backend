@@ -1,6 +1,7 @@
-package com.backend.hall_menu.domain;
+package com.backend.Meal.domain;
 
-import com.backend.hall_menu.presentation.status.MealType;
+import com.backend.Meal.presentation.status.MealFor;
+import com.backend.Meal.presentation.status.MealType;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -11,7 +12,7 @@ public class HallMenu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long mealId;
+    Long hallMenuId;
 
     @Enumerated(EnumType.STRING)
     private MealType mealType;

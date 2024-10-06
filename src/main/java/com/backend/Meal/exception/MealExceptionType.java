@@ -1,4 +1,4 @@
-package com.backend.hall_menu.exception;
+package com.backend.Meal.exception;
 
 import com.backend.common.exception.BaseExceptionType;
 import lombok.Getter;

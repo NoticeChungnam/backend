@@ -1,10 +1,10 @@
-package com.backend.hall_menu.mapper;
+package com.backend.Meal.mapper;
 
-import com.backend.hall_menu.domain.Meal;
-import com.backend.hall_menu.dto.MealResponse;
-import com.backend.hall_menu.dto.MealResponse.*;
-import com.backend.hall_menu.exception.MealException;
-import com.backend.hall_menu.exception.MealExceptionType;
+import com.backend.Meal.domain.Meal;
+import com.backend.Meal.dto.MealResponse;
+import com.backend.Meal.dto.MealResponse.*;
+import com.backend.Meal.exception.MealException;
+import com.backend.Meal.exception.MealExceptionType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
