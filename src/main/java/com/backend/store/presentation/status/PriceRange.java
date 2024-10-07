@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.stream.Stream;
 
 public enum PriceRange {
+    ZERO_TO_FIVE("0~5000"),
     FIVE_TO_TEN("5000~10000"),
     TEN_TO_FIFTEEN("10000~15000"),
     FIFTEEN_TO_TWENTY("15000~20000"),
     TWENTY_TO_TWENTY_FIVE("20000~25000"),
     TWENTY_FIVE_TO_THIRTY("25000~30000"),
-    THIRTY_AND_ABOVE("30000 이상");
+    THIRTY_TO_THIRTY_FIVE("30000~35000");
 
     private final String description;
 

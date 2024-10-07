@@ -1,14 +1,17 @@
 package com.backend.store.domain;
 
 
-import com.backend.store.domain.request.StoreRequest;
-import com.backend.store.domain.response.StoreResponse;
+import static com.backend.store.presentation.status.CategoryMajor.CAFE;
+import static com.backend.store.presentation.status.CategoryMajor.RESTAURANT;
+
 import com.backend.store.exception.StoreException;
 import com.backend.store.exception.StoreExceptionType;
+import com.backend.store.presentation.status.Area;
+import com.backend.store.presentation.status.CategoryMajor;
+import com.backend.store.presentation.status.PriceRange;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StoreList {
     private final List<Store> stores;
@@ -17,61 +20,49 @@ public class StoreList {
         this.stores = new ArrayList<>(stores);
     }
 
-    public static StoreList createTwoStoreList(StoreRequest storeRequest, List<Store> allStores) {
-        List<Store> filteredStores = allStores.stream()
-                .filter(store -> store.getPriceRange().equals(storeRequest.priceRange()))
-                .filter(store -> store.getArea().equals(storeRequest.area()))
-                .filter(store -> store.getCategoryMajor().equals(storeRequest.category()))
-                .collect(Collectors.toList());
-        validateMinTwoStores(filteredStores);
-        return new StoreList(filteredStores);
+    public static StoreList of(List<Store> stores) {
+        return new StoreList(stores);
     }
 
-    public static void validateMinTwoStores(List<Store> stores) {
-        if (stores.size() < 2) {
-            throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
-        }
+    public Store getOneReloadStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor) {
+        return getFilteredOneStore(targetStoreId, anotherStoreId, priceRange, area, categoryMajor);
     }
 
-    public static StoreList createOneStoreList(Long firstStoreId, Long secondStoreId, List<Store> allStores) {
-        List<Store> filteredStores = allStores.stream()
-                .filter(store -> !store.getStoreId().equals(firstStoreId) && !store.getStoreId().equals(secondStoreId))
-                .collect(Collectors.toList());
-        validateMinOneStore(filteredStores);
-        return new StoreList(filteredStores);
+    public Store getOneRecommendationStore(PriceRange priceRange, Area area, CategoryMajor category) {
+        return getFilteredOneStore(null, null, priceRange, area, category);
     }
 
-    public static void validateMinOneStore(List<Store> stores) {
+    public List<Store> getTwoRecommendationStoreList(PriceRange priceRange, Area area) {
+        Store filteredRestaurantStores = getFilteredOneStore(null, null, priceRange, area, RESTAURANT);
+        Store filteredCafeStores = getFilteredOneStore(null, null, priceRange, area, CAFE);
+
+        return new ArrayList<>(List.of(filteredRestaurantStores, filteredCafeStores));
+    }
+
+    private Store getFilteredOneStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor) {
+         List<Store> storeList = stores.stream()
+                .filter(store -> (!store.getStoreId().equals(targetStoreId) && !store.getStoreId().equals(anotherStoreId))
+                        || targetStoreId == null || anotherStoreId == null)
+                .filter(store -> store.getPriceRange().equals(priceRange))
+                .filter(store -> store.getArea().equals(area) || area == Area.ALL)
+                .filter(store -> store.getCategoryMajor().equals(categoryMajor))
+                .toList();
+         validateStore(storeList);
+         return new StoreList(storeList).getOneRandomStore();
+    }
+
+    private void validateStore(List<Store> stores) {
         if (stores.isEmpty()) {
             throw new StoreException(StoreExceptionType.STORE_NOT_FOUND);
         }
     }
 
-    public List<StoreResponse> getTwoRandomStores() {
+    private Store getOneRandomStore() {
         shuffleStores();
-        return stores.stream()
-                .limit(2)
-                .map(this::toStoreResponse)
-                .toList();
-    }
-
-    public StoreResponse getOneRandomStore() {
-        shuffleStores();
-        return toStoreResponse(stores.get(0));
+        return stores.get(0);
     }
 
     private void shuffleStores() {
         Collections.shuffle(stores);
-    }
-
-    private StoreResponse toStoreResponse(Store store) {
-        return new StoreResponse(
-                store.getStoreId(),
-                store.getStoreName(),
-                store.getLatitude(),
-                store.getLongitude(),
-                store.getPriceRange(),
-                store.getStoreUrl()
-        );
     }
 }

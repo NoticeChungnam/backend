@@ -25,8 +25,8 @@ public class Store {
     @Enumerated(EnumType.STRING)
     private Area area;
     private String address;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
 
     @Enumerated(EnumType.STRING)
     private PriceRange priceRange;
