@@ -4,7 +4,6 @@ package com.backend.store.domain;
 import static com.backend.store.presentation.status.CategoryMajor.CAFE;
 import static com.backend.store.presentation.status.CategoryMajor.RESTAURANT;
 
-import com.backend.store.dto.response.StoreResponse;
 import com.backend.store.exception.StoreException;
 import com.backend.store.exception.StoreExceptionType;
 import com.backend.store.presentation.status.Area;
@@ -25,22 +24,22 @@ public class StoreList {
         return new StoreList(stores);
     }
 
-    public StoreResponse getOneReloadStoreList(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor) {
+    public Store getOneReloadStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor) {
         return getFilteredOneStore(targetStoreId, anotherStoreId, priceRange, area, categoryMajor);
     }
 
-    public StoreResponse getOneRecommendationStoreList(PriceRange priceRange, Area area, CategoryMajor category) {
+    public Store getOneRecommendationStore(PriceRange priceRange, Area area, CategoryMajor category) {
         return getFilteredOneStore(null, null, priceRange, area, category);
     }
 
-    public List<StoreResponse> getTwoRecommendationStoreList(PriceRange priceRange, Area area) {
-        StoreResponse filteredRestaurantStores = getFilteredOneStore(null, null, priceRange, area, RESTAURANT);
-        StoreResponse filteredCafeStores = getFilteredOneStore(null, null, priceRange, area, CAFE);
+    public List<Store> getTwoRecommendationStoreList(PriceRange priceRange, Area area) {
+        Store filteredRestaurantStores = getFilteredOneStore(null, null, priceRange, area, RESTAURANT);
+        Store filteredCafeStores = getFilteredOneStore(null, null, priceRange, area, CAFE);
 
         return new ArrayList<>(List.of(filteredRestaurantStores, filteredCafeStores));
     }
 
-    private StoreResponse getFilteredOneStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor) {
+    private Store getFilteredOneStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor categoryMajor) {
          List<Store> storeList = stores.stream()
                 .filter(store -> (!store.getStoreId().equals(targetStoreId) && !store.getStoreId().equals(anotherStoreId))
                         || targetStoreId == null || anotherStoreId == null)
@@ -58,25 +57,12 @@ public class StoreList {
         }
     }
 
-    private StoreResponse getOneRandomStore() {
+    private Store getOneRandomStore() {
         shuffleStores();
-        return toStoreResponse(stores.get(0));
+        return stores.get(0);
     }
 
     private void shuffleStores() {
         Collections.shuffle(stores);
-    }
-
-    private StoreResponse toStoreResponse(Store store) {
-        return new StoreResponse(
-                store.getStoreId(),
-                store.getStoreName(),
-                store.getLatitude(),
-                store.getLongitude(),
-                store.getPriceRange(),
-                store.getStoreUrl(),
-                store.getCategoryMajor().getDescription(),
-                store.getArea().getDescription()
-        );
     }
 }
