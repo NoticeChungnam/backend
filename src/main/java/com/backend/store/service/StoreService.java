@@ -17,20 +17,19 @@ public class StoreService {
     private final StoreRepository storeRepository;
 
     public List<StoreResponse> getRecommendations(PriceRange priceRange, Area area) {
-        List<Store> stores = storeRepository.findAll();
-        StoreList storeList = StoreList.of(stores);
-        return storeList.getTwoRecommendationStoreList(priceRange, area, stores);
+        return getStoreList().getTwoRecommendationStoreList(priceRange, area);
     }
 
     public StoreResponse getRecommendation(PriceRange priceRange, Area area, CategoryMajor category) {
-        List<Store> stores = storeRepository.findAll();
-        StoreList storeList = StoreList.of(stores);
-        return storeList.getOneRecommendationStoreList(priceRange, area, category, stores);
+        return getStoreList().getOneRecommendationStoreList(priceRange, area, category);
     }
 
     public StoreResponse reloadStore(Long targetStoreId, Long anotherStoreId, PriceRange priceRange, Area area, CategoryMajor category) {
+        return getStoreList().getOneReloadStoreList(targetStoreId, anotherStoreId, priceRange, area, category);
+    }
+
+    private StoreList getStoreList() {
         List<Store> stores = storeRepository.findAll();
-        StoreList storeList = StoreList.of(stores);
-        return storeList.getOneReloadStoreList(targetStoreId, anotherStoreId, priceRange, area, category, stores);
+        return StoreList.of(stores);
     }
 }
