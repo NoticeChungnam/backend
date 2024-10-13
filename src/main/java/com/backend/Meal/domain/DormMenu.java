@@ -3,7 +3,6 @@ package com.backend.Meal.domain;
 import com.backend.Meal.presentation.status.MealType;
 import com.backend.Meal.presentation.status.MenuType;
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 
@@ -24,4 +23,5 @@ public class DormMenu {
     private MenuType menuType;
 
     private String menu;
+
 }
